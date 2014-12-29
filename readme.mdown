@@ -1,0 +1,65 @@
+
+
+# Bicycle Algorithm of Love
+A app that helps bicyclists find their one true love.
+
+
+## Prior to Event
+
+### Administrator Setup
+
+1. Add a question
+    1. Free form text, multiple choice
+    1. Enter question and options
+1. Save
+
+###
+1. Delete a question
+
+
+
+### Participant Registration
+
+1. Sign up
+    1. Name, age, email, sex, sex preference
+1. Answer questions
+    1. All a required
+1. Submit
+
+
+
+## Event Day
+
+### Run a match round
+
+1. Verify attendance 
+    1. Every name checks in - search
+1. Generate number of rounds
+    1. Choose two people in attendance to go on date that havent before
+    1. Highest rated matches (3), friend match (1), anti-match (1)
+1. Save
+
+
+
+
+## Algorithm
+
+1. The number of matched answers
+1. For every person
+    1. Score against every other suitor 
+    1. Score against non-suitor
+    1. Select the match with the individual highest score
+    1. Select the match with the individual lowest score
+1. Schedule the guaranteed matches 
+    1. Random placement
+    1. Allow for reshuffle
+    1. If someones highest match is not possible to schedule, use second higest
+1. Sort the remaining matches based on group highest score 
+1. For remaining matches
+    1. Schedule if both are available in round
+    1. If not, go to next round
+    1. If can't schedule any round, delete match
+    1. Each iteration, only schedule one match for each individual
+
+
+
