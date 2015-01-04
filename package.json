@@ -1,0 +1,41 @@
+{
+  "name": "bike-love",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.10.1",
+    "cookie-parser": "~1.3.3",
+    "debug": "~2.1.1",
+    "express": "~4.10.6",
+    "express3-handlebars": "^0.5.2",
+    "jade": "~1.8.2",
+    "morgan": "~1.5.1",
+    "serve-favicon": "~2.2.0"
+  },
+  "description": "A app that helps bicyclists find their one true love.",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danlash/bike-love.git"
+  },
+  "keywords": [
+    "bike",
+    "bicycle",
+    "love",
+    "speed",
+    "dating"
+  ],
+  "contributors": [
+    { "name": "Dan Lash", "email": "danlash@gmail.com" },
+    { "name": "Leah Courtland", "email": "leah.courtland@gmail.com" } 
+  ],
+  "license": "Attribution-NonCommercial-NoDerivatives 4.0 International",
+  "bugs": {
+    "url": "https://github.com/danlash/bike-love/issues"
+  },
+  "homepage": "https://github.com/danlash/bike-love"
+}
