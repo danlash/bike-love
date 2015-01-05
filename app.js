@@ -8,6 +8,7 @@ var session = require('cookie-session');
 var exphbs  = require('express3-handlebars');
 var passport = require('passport');
 
+var getMenuItems = require('./lib/navigation');
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
 
@@ -29,6 +30,11 @@ app.use(session({ secret: 'atlanta', signed: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+//middlware
+app.use(function(req,res,next){
+  res.locals.menuItems = getMenuItems(req.originalUrl, req.isAuthenticated());
+  return next();
+});
 //routers
 app.use('/', routes);
 app.use('/admin', admin);
