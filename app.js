@@ -4,7 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('cookie-session');
 var exphbs  = require('express3-handlebars');
+var passport = require('passport');
 
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
@@ -23,6 +25,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({ secret: 'atlanta', signed: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//routers
 app.use('/', routes);
 app.use('/admin', admin);
 
