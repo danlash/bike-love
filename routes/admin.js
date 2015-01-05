@@ -36,8 +36,12 @@ var ensureAuthenticated = function(req, res, next) {
   return res.redirect('/admin/login');
 };
 
-router.get('/', ensureAuthenticated, function(req, res) {
-  res.render('admin', { username: req.user.username });
+router.get('/setup', ensureAuthenticated, function(req, res) {
+  res.render('setup', { username: req.user.username });
+});
+
+router.get('/event', ensureAuthenticated, function(req, res) {
+  res.render('event', { username: req.user.username });
 });
 
 router.get('/login', function(req, res) {
@@ -45,7 +49,11 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login',
-  passport.authenticate('local', { successRedirect: '/admin',
-                                   failureRedirect: '/admin/login2' }));
+  passport.authenticate('local', { successRedirect: '/admin/setup',
+                                   failureRedirect: '/admin/login' }));
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/admin/login');
+});
 
 module.exports = router;
