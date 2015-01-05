@@ -62,4 +62,5 @@ A app that helps bicyclists find their one true love.
     1. Each iteration, only schedule one match for each individual
 
 
-
+# Copyright
+&copy; 2014-2015 - Dan Lash & Leah Courtland - Attribution-NonCommercial-NoDerivatives 4.0 International
