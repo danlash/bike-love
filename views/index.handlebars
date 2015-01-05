@@ -1,30 +1,113 @@
 
-      <div class="jumbotron">
-        <h1>Jumbotron heading</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
-      </div>
+<div class="jumbotron">
+  <h1>{{{title}}}</h1>
+  <p class="lead">{{{intro}}}</p>
+</div>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+<form action="/signup" method="post" class="marketing">
+  <div class="col-lg-12">
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+    <div class="row">
 
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Dating Questions</h3>
         </div>
+        <div class="panel-body">
+          <h4>What is your favorite color?</h4>
+          <p>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <input type="radio" name="question_1">
+              </span>
+              <span type="text" class="form-control">Red</span>
 
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <input type="radio" name="question_1">
+              </span>
+              <span type="text" class="form-control">Green</span>
+              
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <input type="radio" name="question_1">
+              </span>
+              <span type="text" class="form-control">Blue</span>
+              
+            </div>
+          </p>
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+          <h4>Whats your best joke?</h4>
+          <p>
+            <textarea name="question_2" class="form-control"></textarea>
+          </p>
         </div>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">Personal Details</h3>
+        </div>
+        <div class="panel-body">
+          <h4>First Name</h4>
+          <p>
+            <input type="text" class="form-control" name="firstname" />
+          </p>
+
+          <h4>Last Name</h4>
+          <p>
+            <input type="text" class="form-control" name="lastname" />
+          </p>
+
+          <h4>Email Address</h4>
+          <p>
+            <input type="email" required="required" class="form-control" name="email" />
+          </p>
+
+          <h4>Age Bracket</h4>
+          <p>
+            <select name="age" class="form-control">
+              <option></option>
+              <option>18-21</option>
+              <option>22-25</option>
+              <option>26-29</option>
+              <option>30-33</option>
+              <option>34-36</option>
+              <option>37-40</option>
+            </select>
+          </p>
+
+          <h4>Self Identified Gender</h4>
+          <p>
+            <select name="sex" class="form-control">
+              <option></option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </p>
+
+          <h4>Sexual Preference</h4>
+          <p>
+            <select name="sexpreference" class="form-control">
+              <option></option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="text-right">
+        <button class="btn btn-lg btn-success">Ready to Roll</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>
