@@ -7,7 +7,4 @@ router.get('/', function(req, res) {
   res.render('index', data);
 });
 
-router.get('/about', function(req, res) {
-  res.render('about', { title: 'Express' });
-});
 module.exports = router;
