@@ -13,8 +13,8 @@ Welcome, {{{username}}}. Setup the survey here!
           </div>
         </div>
         <div class="panel-footer">
-          <button class="btn btn-primary btn-sm" id="add-multiple-choice">Add Multiple Choice Question</button>
-          <button class="btn btn-primary btn-sm" id="add-free-form">Add Free Form Question</button>
+          <button class="btn btn-primary btn-sm" type="button" id="add-multiple-choice">Add Multiple Choice Question</button>
+          <button class="btn btn-primary btn-sm" type="button" id="add-free-form">Add Free Form Question</button>
         </div>
 
       </div>
@@ -36,66 +36,88 @@ Welcome, {{{username}}}. Setup the survey here!
 
     $('#add-free-form').on('click', addFreeForm);
     $('#add-multiple-choice').on('click', addMultipleChoice);
+    $(document).on('click', '.delete-question', deleteQuestion);
+    $(document).on('click', '.remove-option', removeOption);
+    $(document).on('click', '.add-option', addOption);
+
+    function addOption(e) {
+      $(e.target).closest('.question').find('.options').append('\
+<div class="option input-group input-group-sm">\
+  <span class="input-group-addon ">\
+    <input type="radio" name="question_1">\
+  </span>\
+  <input type="text" class="form-control" value="Red">\
+  <span class="input-group-btn">\
+    <button class="btn btn-warning remove-option" type="button">Remove Option</button>\
+  </span>\
+</div>');
+    }
+
+    function removeOption(e) {
+      $(e.target).closest('.option').remove();
+    }
+
+    function deleteQuestion(e) {
+      $(e.target).closest('.question').remove();
+    }
 
     function addFreeForm(e){
       $questions.append('\
-<p class="question col-lg-12">\
+<div class="question col-lg-12">\
   <div class="input-group">\
     <strong><input type="text" class="form-control" value="What\'s your best joke?"></strong>\
     <span class="input-group-btn">\
-      <button class="btn btn-danger remove" type="button">Delete Question</button>\
+      <button class="btn btn-danger delete-question" type="button">Delete Question</button>\
     </span>\
   </div>\
-  <p>\
+  <div>\
     <div><textarea name="question_2" class="form-control"></textarea></div>\
-  </p>\
-</p>');
-      e.preventDefault();
+  </div>\
+</div>');
     }
 
     function addMultipleChoice(e){
       $questions.append('\
-<p class="question col-lg-12">\
+<div class="question col-lg-12">\
   <div class="input-group">\
     <strong><input type="text" class="form-control" value="What is your favorite color?"></strong>\
     <span class="input-group-btn">\
-      <button class="btn btn-danger remove" type="button">Delete Question</button>\
+      <button class="btn btn-danger delete-question" type="button">Delete Question</button>\
     </span>\
   </div>\
-  <p>\
+  <div class="options">\
+    <div class="option input-group input-group-sm">\
+      <span class="input-group-addon ">\
+        <input type="radio" name="question_1">\
+      </span>\
+      <input type="text" class="form-control" value="Red">\
+      <span class="input-group-btn">\
+        <button class="btn btn-warning remove-option" type="button">Remove Option</button>\
+      </span>\
+    </div>\
+    <div class="option input-group input-group-sm">\
+      <span class="input-group-addon">\
+        <input type="radio" name="question_1">\
+      </span>\
+      <input type="text" class="form-control" value="Green">\
+      <span class="input-group-btn">\
+        <button class="btn btn-warning remove-option" type="button">Remove Option</button>\
+      </span>\
+    </div>\
+    <div class="option input-group input-group-sm">\
+      <span class="input-group-addon">\
+        <input type="radio" name="question_1">\
+      </span>\
+      <input type="text" class="form-control" value="Blue">\
+      <span class="input-group-btn">\
+        <button class="btn btn-warning remove-option" type="button">Remove Option</button>\
+      </span>\
+    </div>\
+  </div>\
   <div class="input-group input-group-sm">\
-    <span class="input-group-addon ">\
-      <input type="radio" name="question_1">\
-    </span>\
-    <input type="text" class="form-control" value="Red">\
-    <span class="input-group-btn">\
-      <button class="btn btn-warning remove" type="button">Remove Option</button>\
-    </span>\
+    <button type="button" class="add-option btn btn-info btn-xs">Add Option</button>\
   </div>\
-  <div class="input-group input-group-sm">\
-    <span class="input-group-addon">\
-      <input type="radio" name="question_1">\
-    </span>\
-    <input type="text" class="form-control" value="Green">\
-    <span class="input-group-btn">\
-      <button class="btn btn-warning remove" type="button">Remove Option</button>\
-    </span>\
-  </div>\
-  <div class="input-group input-group-sm">\
-    <span class="input-group-addon">\
-      <input type="radio" name="question_1">\
-    </span>\
-    <input type="text" class="form-control" value="Blue">\
-    <span class="input-group-btn">\
-      <button class="btn btn-warning remove" type="button">Remove Option</button>\
-    </span>\
-  </div>\
-  </p>\
-  <div class="input-group input-group-sm">\
-    <button class="btn btn-info btn-xs">Add Option</button>\
-  </div>\
-</p>');
-      e.preventDefault();
+</div>');
     }
   });
 
