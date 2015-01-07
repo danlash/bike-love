@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var _ = require('underscore');
+var survey = require('../lib/survey');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -38,6 +39,17 @@ var ensureAuthenticated = function(req, res, next) {
 
 router.get('/setup', ensureAuthenticated, function(req, res) {
   res.render('setup', { username: req.user.username });
+});
+
+router.post('/setup', ensureAuthenticated, function(req, res, next){
+  var introduction = req.body.introduction;
+  var questions = req.body.questions;
+
+  survey.save(1, introduction, questions, function(err){
+    if (err) { return next(err); }
+
+    res.redirect('/');
+  });
 });
 
 router.get('/event', ensureAuthenticated, function(req, res) {
