@@ -1,8 +1,26 @@
 Welcome, {{{username}}}. Setup the survey here!
 
-<form action="/admin/survey" method="post" class="marketing">
+<form action="/admin/setup" method="post" class="marketing">
   <div class="row">
     <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Introduction</h3>
+        </div>
+        <div class="panel-body">
+          <h4>Title</h4>
+          <p>
+            <input type="text" name="introduction[title]" class="form-control">
+          </p>
+          <h4>Text</h4>
+          <p>
+            <textarea name="introduction[text]" class="form-control"></textarea>
+          </p>
+        </div>
+        
+      </div>
+
+
       <div class="panel panel-danger">
         <div class="panel-heading">
           <h3 class="panel-title">Questions</h3>
@@ -37,24 +55,26 @@ Welcome, {{{username}}}. Setup the survey here!
     $('#add-free-form').on('click', addFreeForm);
     $('#add-multiple-choice').on('click', addMultipleChoice);
     $(document).on('click', '.delete-question', deleteQuestion);
-    $(document).on('click', '.remove-option', removeOption);
-    $(document).on('click', '.add-option', addOption);
+    $(document).on('click', '.remove-choice', removeChoice);
+    $(document).on('click', '.add-choice', addChoice);
 
-    function addOption(e) {
-      $(e.target).closest('.question').find('.options').append('\
-<div class="option input-group input-group-sm">\
+    function addChoice(e) {
+      var $question = $(e.target).closest('.question');
+      var questionId = $question.data('id');
+      $question.find('.choices').append('\
+<div class="choice input-group input-group-sm">\
   <span class="input-group-addon ">\
-    <input type="radio" name="question_1">\
+    <input type="radio" class="disabled">\
   </span>\
-  <input type="text" class="form-control" value="Red">\
+  <input type="text" name="questions['+questionId+'][choices][]" class="form-control" value="Red">\
   <span class="input-group-btn">\
-    <button class="btn btn-warning remove-option" type="button">Remove Option</button>\
+    <button class="btn btn-warning remove-choice" type="button">Remove Choice</button>\
   </span>\
 </div>');
     }
 
-    function removeOption(e) {
-      $(e.target).closest('.option').remove();
+    function removeChoice(e) {
+      $(e.target).closest('.choice').remove();
     }
 
     function deleteQuestion(e) {
@@ -62,60 +82,37 @@ Welcome, {{{username}}}. Setup the survey here!
     }
 
     function addFreeForm(e){
+      var id = $questions.find('.question').length
       $questions.append('\
-<div class="question col-lg-12">\
+<div class="question col-lg-12" data-id="'+id+'">\
   <div class="input-group">\
-    <strong><input type="text" class="form-control" value="What\'s your best joke?"></strong>\
+    <strong><input type="text" name="questions['+id+'][text]" class="form-control" value="What\'s your best joke?"></strong>\
+    <input type="hidden" name="questions['+id+'][type]" value="freeform">\
     <span class="input-group-btn">\
       <button class="btn btn-danger delete-question" type="button">Delete Question</button>\
     </span>\
   </div>\
   <div>\
-    <div><textarea name="question_2" class="form-control"></textarea></div>\
+    <div><textarea class="form-control disabled"></textarea></div>\
   </div>\
 </div>');
     }
 
     function addMultipleChoice(e){
+      var id = $questions.find('.question').length
       $questions.append('\
-<div class="question col-lg-12">\
+<div class="question col-lg-12" data-id="'+id+'">\
   <div class="input-group">\
-    <strong><input type="text" class="form-control" value="What is your favorite color?"></strong>\
+    <strong><input type="text" name="questions['+id+'][text]" class="form-control" value="What is your favorite color?"></strong>\
+    <input type="hidden" name="questions['+id+'][type]" value="multiplechoice">\
     <span class="input-group-btn">\
       <button class="btn btn-danger delete-question" type="button">Delete Question</button>\
     </span>\
   </div>\
-  <div class="options">\
-    <div class="option input-group input-group-sm">\
-      <span class="input-group-addon ">\
-        <input type="radio" name="question_1">\
-      </span>\
-      <input type="text" class="form-control" value="Red">\
-      <span class="input-group-btn">\
-        <button class="btn btn-warning remove-option" type="button">Remove Option</button>\
-      </span>\
-    </div>\
-    <div class="option input-group input-group-sm">\
-      <span class="input-group-addon">\
-        <input type="radio" name="question_1">\
-      </span>\
-      <input type="text" class="form-control" value="Green">\
-      <span class="input-group-btn">\
-        <button class="btn btn-warning remove-option" type="button">Remove Option</button>\
-      </span>\
-    </div>\
-    <div class="option input-group input-group-sm">\
-      <span class="input-group-addon">\
-        <input type="radio" name="question_1">\
-      </span>\
-      <input type="text" class="form-control" value="Blue">\
-      <span class="input-group-btn">\
-        <button class="btn btn-warning remove-option" type="button">Remove Option</button>\
-      </span>\
-    </div>\
+  <div class="choices">\
   </div>\
   <div class="input-group input-group-sm">\
-    <button type="button" class="add-option btn btn-info btn-xs">Add Option</button>\
+    <button type="button" class="add-choice btn btn-info btn-xs">Add Choice</button>\
   </div>\
 </div>');
     }
