@@ -21,9 +21,9 @@ CREATE TABLE question
   text text,
   type text,
   choices text,
-  surveyid integer,
+  survey_id integer,
   CONSTRAINT question_pk PRIMARY KEY (id),
-  CONSTRAINT question_fk_survey FOREIGN KEY (surveyid)
+  CONSTRAINT question_fk_survey FOREIGN KEY (survey_id)
       REFERENCES survey (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
