@@ -21,15 +21,15 @@ router.get(['/', '/survey'], function(req, res, next) {
 
 router.post('/survey/answer', function(req, res, next) {
   var participant = req.body.participant;
-  var answers = req.body.answers;
 
   participants.save(participant, function(err, savedUser){
     if (err) { return next(err); }
 
     var surveyId = 1;
     var userId = savedUser.id;
+    var questions = req.body.questions;
 
-    survey.answer(surveyId, userId, answers, function(err){
+    survey.answer(userId, questions, function(err){
       if (err) { return next(err); }
 
       res.redirect('/survey/complete');

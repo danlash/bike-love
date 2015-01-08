@@ -17,10 +17,11 @@
             <h4>{{text}}</h4>
             <p>
               {{#if multiplechoice}}
+                <input type="hidden" name="questions[{{../id}}][question_id]" value="{{../id}}">
                 {{#each choices}}
                 <div class="input-group">
                   <span class="input-group-addon">
-                    <input type="radio" name="question_1">
+                    <input type="radio" name="questions[{{../id}}][answer]" value="{{this}}">
                   </span>
                   <span type="text" class="form-control">{{this}}</span>
                 </div>
@@ -28,7 +29,8 @@
               {{/if}}
 
               {{#if freeform}}
-                <textarea name="question_2" class="form-control"></textarea>
+                <input type="hidden" name="questions[{{../id}}][question_id]" value="{{../id}}">
+                <textarea name="questions[{{../id}}][answer]" class="form-control"></textarea>
               {{/if}}
             </p>
             {{/each}}

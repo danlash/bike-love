@@ -1,4 +1,5 @@
 
+DROP TABLE IF EXISTS answer;
 DROP TABLE IF EXISTS participant;
 DROP TABLE IF EXISTS question;
 DROP TABLE IF EXISTS survey;
@@ -41,6 +42,25 @@ CREATE TABLE participant
   gender text,
   sexual_preference text,
   CONSTRAINT participant_pk PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+
+CREATE TABLE answer
+(
+  id serial NOT NULL,
+  question_id integer,
+  participant_id integer,
+  answer text,
+  CONSTRAINT answer_pk PRIMARY KEY (id),
+  CONSTRAINT answer_fk_question FOREIGN KEY (question_id)
+      REFERENCES question (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT answer_fk_participant FOREIGN KEY (participant_id)
+      REFERENCES participant (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
