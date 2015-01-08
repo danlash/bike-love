@@ -3,9 +3,10 @@ var router = express.Router();
 var survey = require('../lib/survey');
 var participants = require('../lib/participants');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  survey.load(1, function(err, survey){
+router.get(['/', '/survey'], function(req, res, next) {
+  var surveyId = 1;
+
+  survey.load(surveyId, function(err, survey){
     if (err) { return next(err); }
 
     survey.questions.forEach(function(question){
