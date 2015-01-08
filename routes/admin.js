@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var _ = require('underscore');
 var survey = require('../lib/survey');
+var db = require('../lib/database');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -66,6 +67,13 @@ router.post('/login',
 router.get('/logout', function(req, res){
   req.logout();
   res.redirect('/admin/login');
+});
+
+router.get('/create_database', ensureAuthenticated, function(req, res, next) {
+  db.create(function(err){ 
+    if (err) { return next(err); }  
+    res.send('Database created.');
+  });
 });
 
 module.exports = router;
