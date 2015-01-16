@@ -1,6 +1,6 @@
 Welcome, {{{username}}}. Setup the survey here!
 
-<form action="/admin/setup" method="post" class="marketing">
+<form action="/admin/setup" method="post" class="marketing admin">
   <div class="row">
     <div class="col-lg-12">
       <div class="panel panel-default">
@@ -74,41 +74,49 @@ Welcome, {{{username}}}. Setup the survey here!
     }
 
     function removeChoice(e) {
-      $(e.target).closest('.choice').remove();
+      var $choice = $(e.target).closest('.choice');
+
+      var $undo = $('<div class="choice"><button type="button" class="btn btn-success btn-xs">Undo</button></div>');
+      $undo.on('click', function(){ $undo.replaceWith($choice); });
+      
+      $choice.replaceWith($undo);
     }
 
     function deleteQuestion(e) {
-      $(e.target).closest('.question').remove();
+      var $question = $(e.target).closest('.question');
+      var questionId = $question.data().questionid || '';
+
+      var $undo = $('<div class="question"><input type="hidden" name="deletes[]" value="'+questionId+'"><button type="button" class="btn btn-success btn-xs">Undo</button></div>');
+      $undo.on('click', function(){ $undo.replaceWith($question); });
+      $question.replaceWith($undo);
     }
 
     function addFreeForm(e){
-      var id = $questions.find('.question').length
+      var id = $questions.find('.question').length //TODO, get max+1 instead
       $questions.append('\
-<div class="question col-lg-12" data-id="'+id+'">\
+<div class="question" data-id="'+id+'">\
   <div class="input-group">\
     <strong><input type="text" name="questions['+id+'][text]" class="form-control" value="What\'s your best joke?"></strong>\
-    <input type="hidden" name="questions['+id+'][type]" value="freeform">\
     <span class="input-group-btn">\
       <button class="btn btn-danger delete-question" type="button">Delete Question</button>\
     </span>\
   </div>\
-  <div>\
-    <div><textarea class="form-control disabled"></textarea></div>\
-  </div>\
+  <input type="hidden" name="questions['+id+'][type]" value="freeform">\
+  <textarea class="form-control disabled"></textarea>\
 </div>');
     }
 
     function addMultipleChoice(e){
       var id = $questions.find('.question').length
       $questions.append('\
-<div class="question col-lg-12" data-id="'+id+'">\
+<div class="question" data-id="'+id+'">\
   <div class="input-group">\
     <strong><input type="text" name="questions['+id+'][text]" class="form-control" value="What is your favorite color?"></strong>\
-    <input type="hidden" name="questions['+id+'][type]" value="multiplechoice">\
     <span class="input-group-btn">\
       <button class="btn btn-danger delete-question" type="button">Delete Question</button>\
     </span>\
   </div>\
+  <input type="hidden" name="questions['+id+'][type]" value="multiplechoice">\
   <div class="choices">\
   </div>\
   <div class="input-group input-group-sm">\
