@@ -9,7 +9,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var admins = [
   { username: 'danlash@gmail.com', password: 'dan' },
-  { username: 'jeffwisard@gmail.com', password: 'jeff' },
+  { username: 'jeffreywisard@gmail.com', password: 'jeff' },
   { username: 'leah.courtland@gmail.com', password: 'leah' }
 ];
 
