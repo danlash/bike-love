@@ -10,31 +10,62 @@ Welcome, {{{username}}}. Setup the survey here!
         <div class="panel-body">
           <h4>Title</h4>
           <p>
-            <input type="text" name="introduction[title]" class="form-control">
+            <input type="text" name="introduction[title]" class="form-control" value="{{title}}">
           </p>
           <h4>Text</h4>
           <p>
-            <textarea name="introduction[text]" class="form-control"></textarea>
+            <textarea name="introduction[text]" class="form-control">{{text}}</textarea>
           </p>
         </div>
         
       </div>
 
-
       <div class="panel panel-danger">
         <div class="panel-heading">
-          <h3 class="panel-title">Questions</h3>
-
+          <h3 class="panel-title">Dating Questions</h3>
         </div>
-        <div class="panel-body">
-          <div id="questions">
-          </div>
+        <div class="panel-body" id="questions">
+          {{#each questions}}
+            <div class="question" data-id="{{@index}}" data-questionid="{{id}}">
+              <div class="input-group">
+                <strong><input type="text" name="questions[{{@index}}][text]" class="form-control" value="{{text}}"></strong>
+                <span class="input-group-btn">
+                  <button class="btn btn-danger delete-question" type="button">Delete Question</button>
+                </span>
+              </div>
+              <input type="hidden" name="questions[{{@index}}][question_id]" value="{{id}}">
+                
+              {{#if multiplechoice}}
+                <input type="hidden" name="questions[{{@index}}][type]" value="multiplechoice">
+                <div class="choices">
+                  {{#each choices}}
+                  <div class="choice input-group input-group-sm">
+                    <span class="input-group-addon">
+                      <input type="radio" class="disabled">
+                    </span>
+                    <input type="text" name="questions[{{@../index}}][choices][]" class="form-control" value="{{this}}">
+                    <span class="input-group-btn">\
+                      <button class="btn btn-warning remove-choice" type="button">Remove Choice</button>
+                    </span>
+                  </div>
+                  {{/each}}
+                </div>
+                <div class="input-group input-group-sm">
+                  <button type="button" class="add-choice btn btn-info btn-xs">Add Choice</button>
+                </div>
+              {{/if}}
+
+              {{#if freeform}}
+                <input type="hidden" name="questions[{{@index}}][type]" value="freeform">
+                <textarea class="form-control disabled"></textarea>
+              {{/if}}
+            </div>
+          {{/each}}
         </div>
         <div class="panel-footer">
           <button class="btn btn-primary btn-sm" type="button" id="add-multiple-choice">Add Multiple Choice Question</button>
           <button class="btn btn-primary btn-sm" type="button" id="add-free-form">Add Free Form Question</button>
         </div>
-
       </div>
         
     </div>

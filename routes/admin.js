@@ -39,14 +39,27 @@ var ensureAuthenticated = function(req, res, next) {
 };
 
 router.get('/setup', ensureAuthenticated, function(req, res) {
-  res.render('setup', { username: req.user.username });
+  survey.load(1, function(err, survey){
+    if (err) { return next(err); }
+
+    survey.questions.forEach(function(question){
+      question.multiplechoice = question.type === 'multiplechoice';
+      question.freeform = question.type === 'freeform';
+    });
+
+    survey.username = req.user.username;
+
+    res.render('setup', survey);  
+  });
+  
 });
 
 router.post('/setup', ensureAuthenticated, function(req, res, next){
   var introduction = req.body.introduction;
   var questions = req.body.questions;
+  var deletes = req.body.deletes;
 
-  survey.save(1, introduction, questions, function(err){
+  survey.save(1, introduction, questions, deletes, function(err){
     if (err) { return next(err); }
 
     res.redirect('/');
