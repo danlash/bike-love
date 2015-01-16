@@ -57,7 +57,7 @@ CREATE TABLE answer
   CONSTRAINT answer_pk PRIMARY KEY (id),
   CONSTRAINT answer_fk_question FOREIGN KEY (question_id)
       REFERENCES question (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
+      ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT answer_fk_participant FOREIGN KEY (participant_id)
       REFERENCES participant (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
