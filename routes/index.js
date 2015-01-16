@@ -35,6 +35,10 @@ router.post('/survey/answer', function(req, res, next) {
       res.redirect('/survey/complete');
     });
   });
+
+  router.get('/survey/complete', function(req, res, next) {
+    res.render('thankyou');
+  });
 });
 
 module.exports = router;
