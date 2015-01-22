@@ -1,3 +1,15 @@
 .admin .question {
   margin-bottom: 1em;
 }
+
+.jumbotron {
+  padding: 5px;
+}
+
+.jumbotron h1 {
+  font-size: 55px;
+}
+
+.jumbotron .lead {
+  font-size: 18px;
+}
