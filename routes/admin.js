@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var _ = require('underscore');
 var survey = require('../lib/survey');
+var participants = require('../lib/participants');
 var db = require('../lib/database');
 
 var passport = require('passport');
@@ -68,6 +69,13 @@ router.post('/setup', ensureAuthenticated, function(req, res, next){
 
 router.get('/event', ensureAuthenticated, function(req, res) {
   res.render('event', { username: req.user.username });
+});
+
+router.get('/answers', ensureAuthenticated, function(req, res, next) {
+  participants.getAllAnswers(function(err, data){
+    if (err) { return next(err); }
+    res.render('answers', data);
+  });
 });
 
 router.get('/login', function(req, res) {

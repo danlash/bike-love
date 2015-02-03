@@ -1,0 +1,34 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email Address</th>
+      <th>Age Bracket</th>
+      <th>Gender</th>
+      <th>Sexual Preference</th>
+      {{#each questions}}
+      <th>{{text}}</th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each participants}}
+    <tr>
+      <td>{{id}}</td>
+      <td>{{first_name}}</td>
+      <td>{{last_name}}</td>
+      <td>{{email_address}}</td>
+      <td>{{age_bracket}}</td>
+      <td>{{gender}}</td>
+      <td>{{sexual_preference}}</td>
+
+      {{#each answers}}
+      <td>{{this}}</td>
+      {{/each}}
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
