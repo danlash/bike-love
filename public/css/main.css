@@ -7,9 +7,19 @@
 }
 
 .jumbotron h1 {
-  font-size: 55px;
+  font-size: 40px;
 }
 
 .jumbotron .lead {
   font-size: 18px;
+}
+
+.panel-danger {
+  border-color: #2D8DEA;
+}
+
+.panel-danger .panel-heading {
+  background-color: #7FB9F2;
+  border-color: #2D8DEA;
+  color: #03376A;
 }
