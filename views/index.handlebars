@@ -5,120 +5,119 @@
 </div>
 
 <form action="/survey/answer" method="post" class="marketing">
-    <div class="row">
-      <div class="col-lg-12">
+  <div class="row">
+    <div class="col-lg-12">
 
-        <div class="panel panel-danger">
-          <div class="panel-heading">
-            <h3 class="panel-title">Algorithm of Bike Love&#8482; &reg;  (Patent Pending) Questions</h3>
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Algorithm of Bike Love&#8482; &reg;  (Patent Pending) Questions</h3>
+        </div>
+        <div class="panel-body">
+          {{#each questions}}
+          <h4>{{text}}</h4>
+          <div class="form-group">
+            {{#if multiplechoice}}
+              <input type="hidden" name="questions[{{../id}}][question_id]" value="{{../id}}">
+              {{#each choices}}
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="radio" name="questions[{{../id}}][answer]" value="{{this}}" required data-error="Please answer the question... for science">
+                </span>
+                <span class="form-control">{{this}}</span>
+              </div>
+              {{/each}}
+            {{/if}}
+
+            {{#if freeform}}
+              <input type="hidden" name="questions[{{../id}}][question_id]" value="{{../id}}">
+              <textarea name="questions[{{../id}}][answer]" class="form-control" required data-error="Please answer the question... for science"></textarea>
+            {{/if}}
+            <div class="help-block with-errors"></div>
           </div>
-          <div class="panel-body">
-            {{#each questions}}
-            <h4>{{text}}</h4>
-            <div class="form-group">
-              {{#if multiplechoice}}
-                <input type="hidden" name="questions[{{../id}}][question_id]" value="{{../id}}">
-                {{#each choices}}
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <input type="radio" name="questions[{{../id}}][answer]" value="{{this}}" required data-error="Please answer the question... for science">
-                  </span>
-                  <span type="text" class="form-control">{{this}}</span>
-                </div>
-                {{/each}}
-              {{/if}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
 
-              {{#if freeform}}
-                <input type="hidden" name="questions[{{../id}}][question_id]" value="{{../id}}">
-                <textarea name="questions[{{../id}}][answer]" class="form-control" required data-error="Please answer the question... for science"></textarea>
-              {{/if}}
-              <div class="help-block with-errors"></div>
-            </div>
-            {{/each}}
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">Personal Details</h3>
+        </div>
+        <div class="panel-body">
+          <h4>First Name</h4>
+          <div class="form-group">
+            <input type="text" class="form-control" name="participant[first_name]" required data-error="Bike Love requires this information" />
+            <div class="help-block with-errors"></div>
+          </div>
+
+          <h4>Last Name</h4>
+          <div class="form-group">
+            <input type="text" class="form-control" name="participant[last_name]" required data-error="Bike Love requires this information" />
+            <div class="help-block with-errors"></div>
+          </div>
+
+          <h4>Email Address</h4>
+          <div class="form-group">
+            <input type="email" class="form-control" name="participant[email_address]" required data-error="Bike Love requires this information" />
+            <div class="help-block with-errors"></div>
+          </div>
+
+          <h4>Age Bracket</h4>
+          <div class="form-group">
+            <select name="participant[age_bracket]" class="form-control" required data-error="Bike Love requires this information">
+              <option> </option>
+              <option>18-21</option>
+              <option>22-25</option>
+              <option>26-29</option>
+              <option>30-33</option>
+              <option>34-36</option>
+              <option>37-40</option>
+              <option>41-45</option>
+              <option>46-50</option>
+              <option>51-55</option>
+              <option>56+</option>
+            </select>
+            <div class="help-block with-errors"></div>
+          </div>
+
+          <h4>Self Identified Gender</h4>
+          <div class="form-group">
+            <select name="participant[gender]" class="form-control" required data-error="Bike Love requires this information">
+              <option> </option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+            <div class="help-block with-errors"></div>
+          </div>
+
+          <h4>Sexual Preference</h4>
+          <div class="form-group">
+            <select name="participant[sexual_preference]" class="form-control" required data-error="Bike Love requires this information">
+              <option> </option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+            <div class="help-block with-errors"></div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h3 class="panel-title">Personal Details</h3>
-          </div>
-          <div class="panel-body">
-            <h4>First Name</h4>
-            <div class="form-group">
-              <input type="text" class="form-control" name="participant[first_name]" required data-error="Bike Love requires this information" />
-              <div class="help-block with-errors"></div>
-            </div>
-
-            <h4>Last Name</h4>
-            <div class="form-group">
-              <input type="text" class="form-control" name="participant[last_name]" required data-error="Bike Love requires this information" />
-              <div class="help-block with-errors"></div>
-            </div>
-
-            <h4>Email Address</h4>
-            <div class="form-group">
-              <input type="email" class="form-control" name="participant[email_address]" required data-error="Bike Love requires this information" />
-              <div class="help-block with-errors"></div>
-            </div>
-
-            <h4>Age Bracket</h4>
-            <div class="form-group">
-              <select name="participant[age_bracket]" class="form-control" required data-error="Bike Love requires this information">
-                <option></option>
-                <option>18-21</option>
-                <option>22-25</option>
-                <option>26-29</option>
-                <option>30-33</option>
-                <option>34-36</option>
-                <option>37-40</option>
-                <option>41-45</option>
-                <option>46-50</option>
-                <option>51-55</option>
-                <option>56+</option>
-              </select>
-              <div class="help-block with-errors"></div>
-            </div>
-
-            <h4>Self Identified Gender</h4>
-            <div class="form-group">
-              <select name="participant[gender]" class="form-control" required data-error="Bike Love requires this information">
-                <option></option>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-              <div class="help-block with-errors"></div>
-            </div>
-
-            <h4>Sexual Preference</h4>
-            <div class="form-group">
-              <select name="participant[sexual_preference]" class="form-control" required data-error="Bike Love requires this information">
-                <option></option>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-              <div class="help-block with-errors"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="row">
+    <div class="col-lg-12 text-right">
+      <button class="btn btn-lg btn-success" type="submit">Ready to Roll</button>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="col-lg-12 text-right">
-        <button class="btn btn-lg btn-success" type="submit">Ready to Roll</button>
-      </div>
-    </div>
+</form>
 
-  </form>
-
-</div>
 
 <script>
   $(function(){
     $('form').validator();
   });
-</script
+</script>
