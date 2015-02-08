@@ -98,3 +98,19 @@ describe('matching multiple people', function(){
   });
 
 });
+
+describe('scoring text based question', function() {
+
+  var matchScore;
+  beforeEach(function(){
+    var person1 = { id: 1, answers: [ { question_id: 1, question_type: 'text', answer: 'one two three four' }, { question_id: 2, question_type: 'text', answer: 'four five' } ] };
+    var person2 = { id: 2, answers: [ { question_id: 1, question_type: 'text', answer: 'one three' }, { question_id: 2, question_type: 'text', answer: 'six seven' } ] };
+
+    matchScore = matcher.match(person1, person2);
+  });
+
+  it('scores based on number of words matching', function(){
+    //question 1 match score: 2/4 + 1/2 = 0.5
+      matchScore.should.equal(0.5);
+  });
+});
