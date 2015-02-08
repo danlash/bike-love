@@ -59,3 +59,42 @@ describe('matching people', function(){
   });
   
 });
+
+describe('matching multiple people', function(){
+
+  var person1, person2, person3;
+  beforeEach(function(){
+    person1 = { id: 1, answers: [ { question_id: 1, answer: 'hey' } ] };
+    person2 = { id: 2, answers: [ { question_id: 1, answer: 'hey' } ] };
+    person3 = { id: 3, answers: [ { question_id: 1, answer: 'hey' } ] };
+
+    matcher.matchAll([person1, person2, person3]);
+  });
+
+  it('matches against all other people', function(){
+    person1.matches.length.should.equal(2);
+    person2.matches.length.should.equal(2);
+    person3.matches.length.should.equal(2);
+  }); 
+
+  it('creates matches', function(){
+    person1.matches[0].should.have.property('matchScore');
+  });
+
+  describe('answers', function(){
+    beforeEach(function(){
+      person1 = { id: 1, answers: [ { question_id: 1, answer: 'yes' }, { question_id: 2, answer: 'yes' }, { question_id: 3, answer: 'no' } ] };
+      person2 = { id: 2, answers: [ { question_id: 1, answer: 'yes' }, { question_id: 2, answer: 'yes' }, { question_id: 3, answer: 'sup' } ] }; 
+      person3 = { id: 3, answers: [ { question_id: 1, answer: 'no' },  { question_id: 2, answer: 'yes' }, { question_id: 3, answer: 'sup' } ] }; 
+
+      matcher.matchAll([person1, person2, person3]);
+    });
+
+    it('are sorted by score', function(){
+      person1.matches[0].matchScore.should.be.greaterThan(person1.matches[1].matchScore);
+      person2.matches[0].matchScore.should.be.greaterThan(person2.matches[1].matchScore - 1); //match scores are equal
+      person3.matches[0].matchScore.should.be.greaterThan(person3.matches[1].matchScore);
+    });
+  });
+
+});
