@@ -81,7 +81,7 @@ describe('matching multiple people', function(){
     person1.matches[0].should.have.property('matchScore');
   });
 
-  describe('answers', function(){
+  describe('matches', function(){
     beforeEach(function(){
       person1 = { id: 1, answers: [ { question_id: 1, answer: 'yes' }, { question_id: 2, answer: 'yes' }, { question_id: 3, answer: 'no' } ] };
       person2 = { id: 2, answers: [ { question_id: 1, answer: 'yes' }, { question_id: 2, answer: 'yes' }, { question_id: 3, answer: 'sup' } ] }; 
