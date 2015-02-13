@@ -154,3 +154,24 @@ describe('matching gays', function(){
 
   });
 });
+
+describe('matching age bracket', function(){
+  var person1, person2, person3, person4, person5;
+
+  beforeEach(function(){
+    person1 = { id: 1, ageBracket: '20-25', answers: [ { question_id: 1, answer: 'hey' }, { question_id: 2, answer: 'music' } ] };
+    person2 = { id: 2, ageBracket: '26-30', answers: [ { question_id: 1, answer: 'hey' }, { question_id: 2, answer: 'music' } ] };
+    person3 = { id: 3, ageBracket: '20-25', answers: [ { question_id: 1, answer: 'ho' }, { question_id: 2, answer: 'music' } ] };
+    person4 = { id: 4, ageBracket: '20-25', answers: [ { question_id: 1, answer: 'hey' }, { question_id: 2, answer: 'music' } ] };
+    person5 = { id: 5, ageBracket: '26-30', answers: [ { question_id: 1, answer: 'ho' }, { question_id: 2, answer: 'music' } ] };
+
+    matcher.matchAll([person1, person2, person3, person4, person5]);
+  });
+
+  it('is boosted', function(){
+    person1.matches[0].suitor.should.equal(person4); //all matching
+    person1.matches[1].suitor.should.equal(person2); //matching 2, different age
+    person1.matches[2].suitor.should.equal(person3); //1 matching, same age
+    person1.matches[3].suitor.should.equal(person5); //1 matching, different age
+  });
+});
