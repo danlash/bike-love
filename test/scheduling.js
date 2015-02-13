@@ -69,4 +69,9 @@ describe('scheduling matches', function(){
     schedule.rounds[1].matches[0].suitor.should.equal(personC);
   });
 
+  it('doesnt schedule a participant if they are already in a round', function(){
+    schedule.rounds[0].matches[1].subject.should.not.equal(personA);
+    schedule.rounds[0].matches[1].suitor.should.not.equal(personA);
+  });
+
 });
