@@ -62,5 +62,25 @@ A app that helps bicyclists find their one true love.
     1. Each iteration, only schedule one match for each individual
 
 
+#### Second pass 
+
+each schedule - run mulitple times, metrics kept to differentiate/sort quality
+-remove duplicate matches
+--lowest priotity match between each pair of participants
+---random if same
+-each iteration
+--make a set of matches
+---most priority for each participant
+---remove from particpants' matches
+--reverse sort by highest level each particpant has been scheduled
+--schedule participant that sat-out last round
+--round robin schedule 
+---remove particpant from current set
+--if cant schedule via round
+---remove from current set
+---add participant's next priority match
+
+
+
 ### Copyright
 &copy; 2014-2015 - Dan Lash & Leah Courtland - Attribution-NonCommercial-NoDerivatives 4.0 International
