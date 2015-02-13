@@ -71,6 +71,11 @@ describe('matching multiple people', function(){
     matcher.matchAll([person1, person2, person3]);
   });
 
+  it('identifies each participant', function(){
+    person1.matches[0].subject.should.equal(person1);
+    should.exist(person1.matches[0].suitor);
+  });
+
   it('matches against all other people', function(){
     person1.matches.length.should.equal(2);
     person2.matches.length.should.equal(2);
@@ -88,12 +93,20 @@ describe('matching multiple people', function(){
       person3 = { id: 3, answers: [ { question_id: 1, answer: 'no' },  { question_id: 2, answer: 'yes' }, { question_id: 3, answer: 'sup' } ] }; 
 
       matcher.matchAll([person1, person2, person3]);
-    });
+    }); 
 
     it('are sorted by score', function(){
       person1.matches[0].matchScore.should.be.greaterThan(person1.matches[1].matchScore);
       person2.matches[0].matchScore.should.be.greaterThan(person2.matches[1].matchScore - 1); //match scores are equal
       person3.matches[0].matchScore.should.be.greaterThan(person3.matches[1].matchScore);
+    });
+
+    it('are ranked by score', function(){
+      person1.matches[0].rank.should.equal(1);
+      person1.matches[1].rank.should.equal(2);
+
+      person2.matches[0].rank.should.equal(1);
+      person2.matches[0].rank.should.equal(1);
     });
   });
 
