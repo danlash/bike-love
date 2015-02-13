@@ -1,5 +1,6 @@
 var matcher = require('../lib/matcher');
 var should = require('should');
+var util = require('util');
 
 describe('matching people', function(){
 
@@ -125,5 +126,31 @@ describe('scoring text based question', function() {
   it('scores based on number of words matching', function(){
     //question 1 match score: 2/4 + 1/2 = 0.5
       matchScore.should.equal(0.5);
+  });
+});
+
+describe('matching gays', function(){
+  var person1, person2, person3, person4, person5;
+
+  beforeEach(function(){
+    person1 = { id: 1, sex: 'Male', sexPreference: 'Female', answers: [ { question_id: 1, answer: 'hey' } ] };
+    person2 = { id: 2, sex: 'Male', sexPreference: 'Male', answers: [ { question_id: 1, answer: 'hey' } ] };
+    person3 = { id: 3, sex: 'Female', sexPreference: 'Male', answers: [ { question_id: 1, answer: 'hey' } ] };
+    person4 = { id: 4, sex: 'Male', sexPreference: 'Male', answers: [ { question_id: 1, answer: 'special' } ] };
+    person5 = { id: 5, sex: 'Female', sexPreference: 'Female', answers: [ { question_id: 1, answer: 'special' } ] };
+
+    matcher.matchAll([person1, person2, person3, person4, person5]);
+  });
+
+  it('respects sexual preference', function(){
+    //only available sex match
+    person1.matches[0].suitor.should.equal(person3); 
+    person2.matches[0].suitor.should.equal(person4); 
+    person3.matches[0].suitor.should.equal(person1); 
+    person4.matches[0].suitor.should.equal(person2);
+    
+    //no available sex match, highest match first
+    person5.matches[0].suitor.should.equal(person4);
+
   });
 });
