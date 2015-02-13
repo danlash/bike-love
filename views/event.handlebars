@@ -1,1 +1,22 @@
-run the event!
+<form action="/admin/event" method="post">
+  <h3>Participants</h3>
+  <p>Check each particpant when they arrive.</p>
+
+  <ul>
+  {{#each participants}}
+
+    <li>
+      <input type="checkbox" name="participantIds[]" value="{{id}}" checked >
+      {{last_name}}, {{first_name}} ({{email_address}})
+    </li>
+
+  {{/each}}
+  </ul>
+
+  <label>
+  Rounds
+  <input type="text" name="rounds" value="5">
+  </label>
+
+  <button class="btn btn-success" type="submit">Ride</button>
+</form>

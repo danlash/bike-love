@@ -1,0 +1,15 @@
+{{#each rounds}}
+
+  <h3>Round number {{number}}</h3>  
+  
+  <ul>
+  {{#each matches}}
+    <li>
+      {{subject.first_name}} {{subject.last_name}} 
+      - {{matchScore}} -
+      {{suitor.first_name}} {{suitor.last_name}}
+    </li>
+  {{/each}}
+  </ul>
+
+{{/each}}

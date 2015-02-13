@@ -4,6 +4,8 @@ var _ = require('underscore');
 var survey = require('../lib/survey');
 var participants = require('../lib/participants');
 var db = require('../lib/database');
+var Scheduler = require('../lib/scheduler');
+var matcher = require('../lib/matcher');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -67,8 +69,22 @@ router.post('/setup', ensureAuthenticated, function(req, res, next){
   });
 });
 
-router.get('/event', ensureAuthenticated, function(req, res) {
-  res.render('event', { username: req.user.username });
+router.get('/event', ensureAuthenticated, function(req, res, next) {
+  participants.getAll(function(err, data){
+    if (err) { return next(err); }
+    res.render('event', { participants: data });
+  });
+});
+
+router.post('/event', ensureAuthenticated, function(req, res, next){
+  participants.findAnswersByParticipantIds(req.body.participantIds, function(err, data){
+    if (err) { return next(err); }
+    var matchedParticipants = matcher.matchAll(data);
+    var scheduler = new Scheduler(req.body.rounds);
+    var schedule = scheduler.schedule(matchedParticipants);
+
+    res.render('schedule', schedule);
+  });
 });
 
 router.get('/answers', ensureAuthenticated, function(req, res, next) {
