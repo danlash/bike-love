@@ -133,11 +133,11 @@ describe('matching gays', function(){
   var person1, person2, person3, person4, person5;
 
   beforeEach(function(){
-    person1 = { id: 1, sex: 'Male', sexPreference: 'Female', answers: [ { question_id: 1, answer: 'hey' } ] };
-    person2 = { id: 2, sex: 'Male', sexPreference: 'Male', answers: [ { question_id: 1, answer: 'hey' } ] };
-    person3 = { id: 3, sex: 'Female', sexPreference: 'Male', answers: [ { question_id: 1, answer: 'hey' } ] };
-    person4 = { id: 4, sex: 'Male', sexPreference: 'Male', answers: [ { question_id: 1, answer: 'special' } ] };
-    person5 = { id: 5, sex: 'Female', sexPreference: 'Female', answers: [ { question_id: 1, answer: 'special' } ] };
+    person1 = { id: 1, gender: 'Male', sexual_preference: 'Female', answers: [ { question_id: 1, answer: 'hey' } ] };
+    person2 = { id: 2, gender: 'Male', sexual_preference: 'Male', answers: [ { question_id: 1, answer: 'hey' } ] };
+    person3 = { id: 3, gender: 'Female', sexual_preference: 'Male', answers: [ { question_id: 1, answer: 'hey' } ] };
+    person4 = { id: 4, gender: 'Male', sexual_preference: 'Male', answers: [ { question_id: 1, answer: 'special' } ] };
+    person5 = { id: 5, gender: 'Female', sexual_preference: 'Female', answers: [ { question_id: 1, answer: 'special' } ] };
 
     matcher.matchAll([person1, person2, person3, person4, person5]);
   });
@@ -159,11 +159,11 @@ describe('matching age bracket', function(){
   var person1, person2, person3, person4, person5;
 
   beforeEach(function(){
-    person1 = { id: 1, ageBracket: '20-25', answers: [ { question_id: 1, answer: 'hey' }, { question_id: 2, answer: 'music' } ] };
-    person2 = { id: 2, ageBracket: '26-30', answers: [ { question_id: 1, answer: 'hey' }, { question_id: 2, answer: 'music' } ] };
-    person3 = { id: 3, ageBracket: '20-25', answers: [ { question_id: 1, answer: 'ho' }, { question_id: 2, answer: 'music' } ] };
-    person4 = { id: 4, ageBracket: '20-25', answers: [ { question_id: 1, answer: 'hey' }, { question_id: 2, answer: 'music' } ] };
-    person5 = { id: 5, ageBracket: '26-30', answers: [ { question_id: 1, answer: 'ho' }, { question_id: 2, answer: 'music' } ] };
+    person1 = { id: 1, age_bracket: '20-25', answers: [ { question_id: 1, answer: 'hey' }, { question_id: 2, answer: 'music' } ] };
+    person2 = { id: 2, age_bracket: '26-30', answers: [ { question_id: 1, answer: 'hey' }, { question_id: 2, answer: 'music' } ] };
+    person3 = { id: 3, age_bracket: '20-25', answers: [ { question_id: 1, answer: 'ho' }, { question_id: 2, answer: 'music' } ] };
+    person4 = { id: 4, age_bracket: '20-25', answers: [ { question_id: 1, answer: 'hey' }, { question_id: 2, answer: 'music' } ] };
+    person5 = { id: 5, age_bracket: '26-30', answers: [ { question_id: 1, answer: 'ho' }, { question_id: 2, answer: 'music' } ] };
 
     matcher.matchAll([person1, person2, person3, person4, person5]);
   });
