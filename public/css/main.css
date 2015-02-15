@@ -28,3 +28,25 @@
   font-size: 0.7em;
   color: #ddd;
 }
+
+.match[data-type=friend] {
+  border-color: blue;
+}
+
+
+.match[data-type=love] {
+  border-color: red;
+}
+
+.match {
+  border: 1px solid;
+  border-radius: 5px;
+  list-style: none;
+  margin-top: 1em;
+  padding: 1ex;
+}
+
+h4 {
+  font-weight: bold;
+  display: inline;
+}

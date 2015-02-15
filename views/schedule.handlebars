@@ -4,7 +4,8 @@
   
   <ul>
   {{#each matches}}
-    <li>
+    <li class="match" data-type="{{matchType}}">
+      <h4>{{rank}}</h4>
       {{subject.first_name}} {{subject.last_name}} 
       - {{matchScore}} -
       {{suitor.first_name}} {{suitor.last_name}}
