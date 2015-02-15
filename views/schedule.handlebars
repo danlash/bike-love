@@ -1,6 +1,6 @@
 {{#each rounds}}
 
-  <h3>Round number {{number}}</h3>  
+  <h3>Round number {{number}} - {{matches.length}} matches {{#if sittingOut}}- {{sittingOut.first_name}} {{sittingOut.last_name}} sitting out{{/if}}</h3>  
   
   <ul>
   {{#each matches}}
